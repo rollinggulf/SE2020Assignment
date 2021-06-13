@@ -8,9 +8,6 @@ import {Single} from "../pages";
 import { BrowserRouter , Switch,Route,Link} from "react-router-dom"
 
 
-
-
-
 const columns = 
 [
   {
@@ -59,17 +56,16 @@ const columns =
     render: (text, record) => 
       (
         <Space size="middle">
-           <BrowserRouter>
-            <div>
-              <Link to="/employee/2">Edit</Link>
-            </div>
-            <Switch>      
-              <Route path="/employee/:id" exact component={Single}></Route>
-            </Switch>
-           </BrowserRouter>
-         
-          {/* <button onClick={()=>browseHistory.push(text.key)}>Edit</button> */}
-          <button onClick={()=> actionCreators.delete(text.key)}>Delete</button>
+          <button>
+            <Link to={"/employee/"+text.key}>
+            Info
+            </Link>
+          </button>
+          <button onClick={()=> actionCreators.delete(text.key)}>
+            <Link to={"/list"}>
+              Delete
+            </Link>
+          </button>
         </Space>
       )
     
@@ -77,39 +73,16 @@ const columns =
   }
 ];
 
+
 const ori_data=
 [
-    {
-    key: '1',
-    firstName: 'John',
-    lastName: 'Brown',
-    age: 32,
-    address: 'New York No. 1 Lake Park',
-    tags: ['nice', 'developer'],
-    },
-    {
-    key: '2',
-    firstName: 'Jim',
-    lastName: 'Green',
-    age: 42,
-    address: 'London No. 1 Lake Park',
-    tags: ['loser'],
-    },
-    {
-    key: '3',
-    firstName: 'Joe',
-    lastName: 'Black',
-    age: 32,
-    address: 'Sidney No. 1 Lake Park',
-    tags: ['cool', 'teacher'],
-    }
 ];
 
     
 
 const state={
     columns:columns,
-    data:[]
+    data:ori_data
 }
 
 export default state

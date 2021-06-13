@@ -1,30 +1,44 @@
 # SE2020Assignment
 
+
+
 ### 启动
-启动后端服务器
-yarn start 启动前端
-可能需要安装依赖文件（没有上传至github）
+
+- 启动后端：在idea 下运行backend\src\main\java\com\se2020\backend\BackendApplication.java
+- 启动前端: 命令行，在项目根目录下，输入yarn start 
+
+- 注意：可能需要安装依赖文件（没有上传至github）
+
 
 
 ### 使用
 
->初始页面只有 to employee , to list , to aaa 三个导航链接
+- 项目启动完成时，初始页面只有 to employee , to list , to aaa 三个导航链接，页面主体部分为空白
 
 - 点击To employee 或者输入/localhost:3000/employee可以进入employee页面
-  - employee页面有一个 **空表格（前端存储初始化为空数组）**
-  - 点击下方get按钮将会调用GET从后端获取数据给前端的store进行初始化，将会显示三行初始数据
-  - 可以点击每一行的删除实现对该行的删除操作,前端的store会改变，不会自动post到后端
-  - 目前还没有完成edit操作逻辑
-  - 点击下方post会将当前前端store的数据发送给后端（后端的json文件会被更改，之后再调用GET将会得到被更改后的数据）
+  - employee页面有一个表格，用来向list表加入员工信息或者修改已有员工信息
+    - First Name 和 Last Name 共同决定一条数据，也即当First Name 和 Last Name与现有表项相同时，判断为更改，否则判断为增添
+    - 点击commit后，修改后的前端store会立即Post到后端
   
 - 点击To list 或者输入/localhost:3000/list可以进入list页面
-  - list页面和employee页面是一样的，目前主要用来展示多页面共享数据，list和employee共享前端store数据，在一个页面上执行删除操作后的影响也可以在另一个页面上看到
-  - 也可以在list页面上执行删除，点击GET,POST按钮
+  
+  - 每次进入list页面时，将向后端发送一个GET请求以获得后端数据，我们提交的版本后端存有一条数据，因此会显示一条数据
+  
+  - 点击下方get按钮将会调用GET从后端获取数据给前端的store进行初始化
+  
+  - 点击下方post会将当前前端store的数据发送给后端（后端的json文件会被更改，之后再调用GET将会得到被更改后的数据）
+  
+  - 可以点击每一行的delete实现对该行的删除操作,前端的store会改变，但不会自动post到后端，需要点击post按钮才会提交给后端
+  
+  - 点击info按钮，可以进入员工详情页面，只显示该员工的那一条数据，采取约定式路由的做法，第一条的路由为http://localhost:3001/employee/1，第二条为http://localhost:3001/employee/2 ，依次类推，如果删除了数据，key不会重新分配，而是在原来的基础上继续增长
+  
+    
+  
+- 点击To aaa或者输入/localhost:3000/employee/aaa 将会显示所有数据，和list页面一样
+  - 由于我们用自然数作为key，故aaa不是一个key，就如同当只有3条数据时访问http://localhost:3001/employee/4一样，这里用作展示我们的异常处理，此时将会显示所有数据
   
   
-- 点击To aaa或者输入/localhost:3000/employee/aaa 可以进入aaa个人页面
-  - 目前个人页面只会显示employee aaa's page字符串，根据/employee/:id中的id替换字符串内容
- 
+
 
 ### 备注
 

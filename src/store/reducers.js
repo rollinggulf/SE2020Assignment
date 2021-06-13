@@ -29,6 +29,38 @@ const reducers=(prevState = state , action)=>{
             let newData_2 = action.payload
             newState.data = newData_2
             break;
+
+        case type.MODIFY:
+            var coming_change = {
+            key:(newState.data.length+1).toString(), 
+            firstName: action.payload.firstname,
+            lastName: action.payload.lastname,
+            age: parseInt(action.payload.age),
+            address: action.payload.address,
+            tags: ['nice'],
+            }
+            
+            var newData_3 = newState.data
+            var found = false
+            console.log("in modify")
+            for(var i = 0; i < newData_3.length; i++) {
+                if( newData_3[i].firstName == coming_change.firstName && newData_3[i].lastName == coming_change.lastName)
+                   {
+                       newData_3[i].age = coming_change.age
+                       newData_3[i].address = coming_change.address
+                       console.log("match and modify!")
+                       found=true
+                   }
+            
+            }
+            if(found ==false)
+            {
+                console.log("type of normal ",typeof newData_3[0])
+                console.log("type of new ",typeof coming_change)
+                newData_3.push(coming_change)
+            }
+            newState.data=newData_3
+            break;
         default:
             break;
     }
